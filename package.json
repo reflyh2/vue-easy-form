@@ -1,6 +1,6 @@
 {
   "name": "@reflyh2/vue-easy-form",
-  "version": "0.1.10",
+  "version": "0.1.13",
   "private": false,
   "main": "dist/vue-easy-form.umd.js",
   "module": "dist/vue-easy-form.esm.js",

@@ -30,20 +30,5 @@ module.exports = defineConfig({
           isCustomElement: tag => tag.startsWith('vue-')
         }
       }))
-    
-    // Add this new rule
-    config.module
-      .rule('css')
-      .oneOf('vue')
-      .use('postcss-loader')
-      .tap(options => {
-        options.postcssOptions = {
-          plugins: [
-            require('tailwindcss'),
-            require('autoprefixer')
-          ]
-        }
-        return options
-      })
   }
 })
