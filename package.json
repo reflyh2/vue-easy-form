@@ -1,6 +1,10 @@
 {
   "name": "@reflyh2/vue-easy-form",
   "version": "0.1.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reflyh2/vue-easy-form.git"
+  },
   "private": false,
   "main": "dist/vue-easy-form.umd.js",
   "module": "dist/vue-easy-form.esm.js",
