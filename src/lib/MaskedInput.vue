@@ -137,6 +137,6 @@ export default {
   @apply flex-1 border-none outline-none w-full px-2 bg-transparent;
 }
 .prefix, .suffix {
-  @apply flex-shrink-0 px-1 text-gray-400;
+  @apply flex-shrink-0 px-1 text-gray-400 flex items-center h-full;
 }
 </style>
