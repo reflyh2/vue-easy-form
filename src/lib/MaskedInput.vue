@@ -137,9 +137,9 @@ export default {
   @apply flex-1 border-none outline-none w-full px-2 bg-transparent;
 }
 .prefix-wrapper, .suffix-wrapper {
-  @apply flex items-center justify-center h-full;
+  @apply flex items-center justify-center h-full text-gray-300;
 }
 .prefix-wrapper :deep(svg), .suffix-wrapper :deep(svg) {
-  @apply w-5 h-5 text-gray-400;
+  @apply w-5 h-5 text-gray-400 px-2;
 }
 </style>
