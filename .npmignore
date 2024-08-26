@@ -1,0 +1,6 @@
+src
+public
+*.log
+.gitignore
+babel.config.js
+*.map
