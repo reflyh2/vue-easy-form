@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-form",
-  "version": "0.1.0",
+  "version": "0.1.10",
   "private": false,
   "main": "dist/vue-easy-form.umd.js",
   "module": "dist/vue-easy-form.esm.js",
