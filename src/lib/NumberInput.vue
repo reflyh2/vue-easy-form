@@ -1,6 +1,6 @@
 <template>
   <div class="number-input-container" :class="[customClass, {'ring-1': isFocused, [`ring-${focusRingColor}`]: isFocused}]">
-    <span v-if="prefix" class="prefix">{{ prefix }}</span>
+    <slot name="prefix"></slot>
     <input
       type="text"
       :value="formattedValue"
@@ -9,7 +9,7 @@
       @focus="handleFocus"
       class="number-input"
     />
-    <span v-if="suffix" class="suffix">{{ suffix }}</span>
+    <slot name="suffix"></slot>
   </div>
 </template>
 
@@ -27,14 +27,6 @@ export default {
     },
     customClass: {
       type: [String, Object, Array],
-      default: ''
-    },
-    prefix: {
-      type: String,
-      default: ''
-    },
-    suffix: {
-      type: String,
       default: ''
     },
     focusRingColor: {
@@ -102,8 +94,5 @@ export default {
 }
 .number-input {
   @apply flex-1 border-none outline-none w-full px-2 bg-transparent;
-}
-.prefix, .suffix {
-  @apply flex-shrink-0 px-1 text-gray-400;
 }
 </style>
