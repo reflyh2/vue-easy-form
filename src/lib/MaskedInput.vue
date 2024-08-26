@@ -1,6 +1,6 @@
 <template>
   <div class="masked-input-container" :class="[customClass, {'ring-1': isFocused, [`ring-${focusRingColor}`]: isFocused}]">
-    <slot name="prefix"></slot>
+    <span class="prefix"><slot name="prefix"></slot></span>
     <input
       type="text"
       :value="maskedValue"
@@ -9,7 +9,7 @@
       @focus="handleFocus"
       class="masked-input"
     />
-    <slot name="suffix"></slot>
+    <span class="suffix"><slot name="suffix"></slot></span>
   </div>
 </template>
 
@@ -135,5 +135,8 @@ export default {
 }
 .masked-input {
   @apply flex-1 border-none outline-none w-full px-2 bg-transparent;
+}
+.prefix, .suffix {
+  @apply flex-shrink-0 px-1 text-gray-400;
 }
 </style>
