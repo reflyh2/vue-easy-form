@@ -4,3 +4,5 @@ public
 .gitignore
 babel.config.js
 *.map
+src/App.vue
+src/main.js
