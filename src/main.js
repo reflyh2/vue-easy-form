@@ -1,5 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import VueEasyForm from '@reflyh2/vue-easy-form'
 import './assets/tailwind.css'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(VueEasyForm)
+app.mount('#app')
