@@ -11,7 +11,11 @@
         v-for="date in calendarDates"
         :key="date.toISOString()"
         class="calendar-date"
-        :class="{ 'current-month': isCurrentMonth(date), 'selected': isSelected(date) }"
+        :class="{
+          'current-month': isCurrentMonth(date),
+          'selected': isSelected(date),
+          'disabled': isDisabled(date)
+        }"
         @click="selectDate(date)"
       >
         {{ date.getDate() }}
@@ -130,9 +134,8 @@ export default {
       return date.toDateString() === this.selectedDate.toDateString()
     },
     selectDate(date) {
-      if (this.minDate && date < this.minDate) return
-      if (this.maxDate && date > this.maxDate) return
-      this.$emit('select', date)
+      if (this.isDisabled(date)) return;
+      this.$emit('select', date);
     },
     selectMonth(index) {
       this.currentDate = new Date(this.currentDate.getFullYear(), index, 1)
@@ -141,6 +144,9 @@ export default {
     selectYear(year) {
       this.currentDate = new Date(year, this.currentDate.getMonth(), 1)
       this.currentView = 'date'
+    },
+    isDisabled(date) {
+      return (this.minDate && date < this.minDate) || (this.maxDate && date > this.maxDate);
     }
   }
 }
@@ -182,5 +188,8 @@ export default {
 }
 .calendar-month, .calendar-year {
   @apply text-center p-2 cursor-pointer hover:bg-gray-100 rounded-md;
+}
+.disabled {
+  @apply text-gray-300 cursor-not-allowed font-medium hover:bg-white;
 }
 </style>
