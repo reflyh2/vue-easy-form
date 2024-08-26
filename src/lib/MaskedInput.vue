@@ -1,6 +1,6 @@
 <template>
   <div class="masked-input-container" :class="[customClass, {'ring-1': isFocused, [`ring-${focusRingColor}`]: isFocused}]">
-    <div class="prefix-wrapper"><slot name="prefix"></slot></div>
+    <div :class="['prefix-wrapper', prefixClass]"><slot name="prefix"></slot></div>
     <input
       type="text"
       :value="maskedValue"
@@ -9,7 +9,7 @@
       @focus="handleFocus"
       class="masked-input"
     />
-    <div class="suffix-wrapper"><slot name="suffix"></slot></div>
+    <div :class="['suffix-wrapper', suffixClass]"><slot name="suffix"></slot></div>
   </div>
 </template>
 
@@ -26,6 +26,14 @@ export default {
       required: true
     },
     customClass: {
+      type: [String, Object, Array],
+      default: ''
+    },
+    prefixClass: {
+      type: [String, Object, Array],
+      default: ''
+    },
+    suffixClass: {
       type: [String, Object, Array],
       default: ''
     },
@@ -137,9 +145,9 @@ export default {
   @apply flex-1 border-none outline-none w-full px-2 bg-transparent;
 }
 .prefix-wrapper, .suffix-wrapper {
-  @apply flex items-center justify-center h-full text-gray-300;
+  @apply flex items-center justify-center h-full;
 }
 .prefix-wrapper :deep(svg), .suffix-wrapper :deep(svg) {
-  @apply w-5 h-5 text-gray-400 px-2;
+  @apply w-7 h-5 px-1;
 }
 </style>
