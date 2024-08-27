@@ -166,10 +166,10 @@ export default {
   @apply text-center text-sm font-semibold text-gray-600;
 }
 .calendar-date {
-  @apply text-center p-1 cursor-pointer hover:bg-gray-100 rounded-md;
+  @apply text-center p-1 cursor-pointer text-gray-400 hover:bg-gray-100 rounded-md;
 }
 .current-month {
-  @apply font-semibold;
+  @apply text-black;
 }
 .selected {
   @apply bg-teal-500 text-white hover:bg-teal-600;
