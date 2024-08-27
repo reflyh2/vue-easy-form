@@ -32,9 +32,9 @@ Then, you can use the components in your Vue templates:
 
 ```
 <template>
-<MaskedInput v-model="phone" mask="(###) ###-####" />
-<NumberInput v-model="amount" locale="en-US" />
-<DatePicker v-model="date" :min-date="minDate" :max-date="maxDate" />
+   <MaskedInput v-model="phone" mask="(###) ###-####" />
+   <NumberInput v-model="amount" locale="en-US" />
+   <DatePicker v-model="date" :min-date="minDate" :max-date="maxDate" />
 </template>
 ```
 
@@ -49,6 +49,24 @@ Props:
 - `mask`: The mask pattern (e.g., "###-##-####" for a Social Security Number)
 - `customClass`: Custom CSS classes to apply to the input container
 
+Usage:
+
+```
+<template>
+   <MaskedInput v-model="phoneNumber" mask="(###) ###-####" />
+</template>
+
+<script>
+export default {
+   data() {
+      return {
+         phoneNumber: ''
+      }
+   }
+}
+</script>
+```
+
 ### NumberInput
 
 An input for numbers with locale-specific formatting.
@@ -57,6 +75,24 @@ Props:
 - `modelValue`: The input value (v-model)
 - `locale`: The locale to use for number formatting (default: 'en-US')
 - `customClass`: Custom CSS classes to apply to the input container
+
+Usage:
+
+```
+<template>
+   <NumberInput v-model="amount" locale="en-US" />
+</template>
+
+<script>
+export default {
+   data() {
+      return {
+         amount: 1000
+      }
+   }
+}
+</script>
+```
 
 ### DatePicker
 
@@ -68,6 +104,85 @@ Props:
 - `minDate`: The minimum selectable date (ISO format)
 - `maxDate`: The maximum selectable date (ISO format)
 - `customClass`: Custom CSS classes to apply to the input container
+
+Usage:
+
+```
+<template>
+   <DatePicker
+      v-model="selectedDate"
+      :min-date="minDate"
+      :max-date="maxDate"
+   />
+</template>
+
+<script>
+export default {
+   data() {
+      return {
+         selectedDate: '',
+         minDate: '2024-01-01',
+         maxDate: '2024-12-31'
+      }
+   }
+}
+</script>
+```
+
+### DateRangePicker
+
+A date range input with a calendar popup for selecting start and end dates.
+
+Props:
+- `modelValue`: The selected date range (v-model, an object with `startDate` and `endDate` properties in ISO format)
+- `locale`: The locale to use for date formatting (default: 'en-US')
+- `minDate`: The minimum selectable date (ISO format)
+- `maxDate`: The maximum selectable date (ISO format)
+- `customClass`: Custom CSS classes to apply to the input container
+- `quickRanges`: An array of quick date range options (optional)
+
+Usage:
+
+```
+<template>
+   <DateRangePicker
+      v-model="dateRange"
+      :min-date="minDate"
+      :max-date="maxDate"
+      :quick-ranges="quickRangeOptions"
+   />
+</template>
+
+<script>
+export default {
+   data() {
+      return {
+         dateRange: { startDate: '', endDate: '' },
+         minDate: '2023-01-01',
+         maxDate: '2023-12-31',
+         quickRangeOptions: [
+            {
+               label: 'This Week',
+               getRange: () => {
+                  const today = new Date();
+                  const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+                  return { startDate: firstDayOfWeek, endDate: new Date() };
+               }
+            },
+            {
+               label: 'Last 7 Days',
+               getRange: () => {
+                  const end = new Date();
+                  const start = new Date(end.getTime() - 6 24 60 60 1000);
+                  return { startDate: start, endDate: end };
+               }
+            }
+         ]
+      }
+   }
+}
+</script>
+```
 
 ## Development
 
