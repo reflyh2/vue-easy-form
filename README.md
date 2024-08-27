@@ -46,25 +46,13 @@ A text input with a customizable mask for formatted text entry.
 
 Props:
 - `modelValue`: The input value (v-model)
-- `mask`: The mask pattern (e.g., "###-##-####" for a Social Security Number)
+- `mask`: The mask pattern (#: 0-9, A: Alphabets, *: Alphanumeric)
 - `customClass`: Custom CSS classes to apply to the input container
 
 Usage:
 
 ```
-<template>
-   <MaskedInput v-model="phoneNumber" mask="(###) ###-####" />
-</template>
-
-<script>
-export default {
-   data() {
-      return {
-         phoneNumber: ''
-      }
-   }
-}
-</script>
+<MaskedInput v-model="phoneNumber" mask="(###) ###-####" />
 ```
 
 ### NumberInput
@@ -79,19 +67,7 @@ Props:
 Usage:
 
 ```
-<template>
-   <NumberInput v-model="amount" locale="en-US" />
-</template>
-
-<script>
-export default {
-   data() {
-      return {
-         amount: 1000
-      }
-   }
-}
-</script>
+<NumberInput v-model="amount" locale="en-US" />
 ```
 
 ### DatePicker
@@ -108,25 +84,10 @@ Props:
 Usage:
 
 ```
-<template>
-   <DatePicker
-      v-model="selectedDate"
-      :min-date="minDate"
-      :max-date="maxDate"
-   />
-</template>
-
-<script>
-export default {
-   data() {
-      return {
-         selectedDate: '',
-         minDate: '2024-01-01',
-         maxDate: '2024-12-31'
-      }
-   }
-}
-</script>
+<DatePicker 
+   v-model="selectedDate" 
+   :min-date="minDate" 
+   :max-date="maxDate" />
 ```
 
 ### DateRangePicker
@@ -144,22 +105,18 @@ Props:
 Usage:
 
 ```
-<template>
-   <DateRangePicker
-      v-model="dateRange"
-      :min-date="minDate"
-      :max-date="maxDate"
-      :quick-ranges="quickRangeOptions"
-   />
-</template>
+<DateRangePicker
+   v-model="dateRange"
+   :min-date="minDate"
+   :max-date="maxDate"
+   :quick-ranges="quickRangeOptions"
+/>
 
 <script>
 export default {
    data() {
       return {
-         dateRange: { startDate: '', endDate: '' },
-         minDate: '2023-01-01',
-         maxDate: '2023-12-31',
+         // Other data
          quickRangeOptions: [
             {
                label: 'This Week',
@@ -183,6 +140,43 @@ export default {
 }
 </script>
 ```
+
+### TimePicker
+
+A time input with a popup for easy time selection.
+
+Props:
+- `modelValue`: The selected time (v-model, in HH:mm or HH:mm:ss format)
+- `format`: The time format to use ('12' or '24', default: '24')
+- `detail`: The level of detail for time selection ('hour', 'minute', or 'second', default: 'minute')
+- `customClass`: Custom CSS classes to apply to the input container
+
+Usage:
+
+```
+<TimePicker
+   v-model="selectedTime"
+   format="12"
+   detail="second"
+/>
+```
+
+## Common Features
+
+### Prefix and Suffix Slots
+
+All input components (MaskedInput, NumberInput, DatePicker, DateRangePicker, and TimePicker) support prefix and suffix slots for adding custom content before or after the input field.
+
+Usage:
+
+```
+<MaskedInput v-model="phone" mask="(###) ###-####">
+   <template #prefix><icon-phone /></template>
+   <template #suffix><icon-check v-if="isValid" /></template>
+</MaskedInput>
+```
+
+This feature allows you to easily add icons or other custom elements to your input components.
 
 ## Development
 
