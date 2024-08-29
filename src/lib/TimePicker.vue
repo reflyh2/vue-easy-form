@@ -14,6 +14,7 @@
       <div v-if="!isTimeValid" class="error-message">Invalid time</div>
       <div v-if="showTimePicker" class="time-picker-popup" @click.stop>
          <TimePickerPopup
+            ref="timePickerPopup"
             :selectedTime="internalValue"
             :format="format"
             :detail="detail"
@@ -105,13 +106,29 @@ export default {
          if (parsedTime) {
             this.internalValue = parsedTime;
             this.$emit('update:modelValue', this.internalValue);
+            if (this.showTimePicker) {
+               this.$refs.timePickerPopup.updateSelectedTime(parsedTime);
+            }
          }
       },
-      // parseTime(timeString) {
-      //    // Implement time parsing logic here
-      //    // This should handle both 12-hour and 24-hour formats
-      //    // and return the time in ISO format (HH:mm:ss)
-      // },
+      parseTime(timeString) {
+         const [time, period] = timeString.split(/\s+/);
+         let [hours, minutes, seconds] = time.split(':').map(Number);
+
+         if (this.format === '12' && period) {
+            if (period.toLowerCase() === 'pm' && hours !== 12) {
+               hours += 12;
+            } else if (period.toLowerCase() === 'am' && hours === 12) {
+               hours = 0;
+            }
+         }
+
+         if (isNaN(hours) || hours < 0 || hours > 23) return null;
+         if (isNaN(minutes) || minutes < 0 || minutes > 59) return null;
+         if (seconds !== undefined && (isNaN(seconds) || seconds < 0 || seconds > 59)) return null;
+
+         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}${seconds !== undefined ? `:${seconds.toString().padStart(2, '0')}` : ''}`;
+      },
       handleBlur() {
          this.isFocused = false;
       },

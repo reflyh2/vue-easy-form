@@ -148,6 +148,21 @@
        }
 
        this.updateTime();
+     },
+     updateSelectedTime(time) {
+       const [hours, minutes, seconds] = time.split(':');
+       this.selectedHour = parseInt(hours);
+       this.selectedMinute = parseInt(minutes);
+       if (this.detail === 'second') {
+         this.selectedSecond = parseInt(seconds);
+       }
+       if (this.format === '12') {
+         this.ampm = this.selectedHour >= 12 ? 'PM' : 'AM';
+         this.selectedHour = this.selectedHour % 12 || 12;
+       }
+       this.$nextTick(() => {
+         this.scrollToSelected();
+       });
      }
    }
  }
