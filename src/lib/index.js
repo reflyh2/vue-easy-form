@@ -4,9 +4,10 @@ import NumberInput from './NumberInput.vue'
 import DatePicker from './DatePicker.vue'
 import DateRangePicker from './DateRangePicker.vue'
 import TimePicker from './TimePicker.vue'
+import TextInput from './TextInput.vue'
 
 export {
-   MaskedInput, NumberInput, DatePicker, DateRangePicker, TimePicker
+   MaskedInput, NumberInput, DatePicker, DateRangePicker, TimePicker, TextInput
 }
 
 export default { 
@@ -15,6 +16,7 @@ export default {
       app.component('NumberInput', NumberInput),
       app.component('DatePicker', DatePicker),
       app.component('DateRangePicker', DateRangePicker),
-      app.component('TimePicker', TimePicker)
+      app.component('TimePicker', TimePicker),
+      app.component('TextInput', TextInput)
    }
 }
