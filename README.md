@@ -4,9 +4,12 @@ vue-easy-form is a Vue 3 component library that provides easy-to-use, customizab
 
 ## Features
 
+- TextInput: Basic text input with customizable styling
 - MaskedInput: Input with customizable mask for formatted text entry
 - NumberInput: Input for numbers with locale-specific formatting
 - DatePicker: Date input with calendar popup for easy date selection
+- DateRangePicker: Date range input with calendar popup for selecting start and end dates
+- TimePicker: Time input with dropdown for easy time selection
 
 ## Installation
 
@@ -159,6 +162,20 @@ Usage:
    format="12"
    detail="second"
 />
+```
+
+### TextInput
+
+A simple text input component with consistent styling.
+
+Props:
+- `modelValue`: The input value (v-model)
+- `customClass`: Custom CSS classes to apply to the input container
+
+Usage:
+
+```
+<TextInput v-model="text" />
 ```
 
 ## Common Features
