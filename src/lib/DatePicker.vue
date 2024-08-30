@@ -1,5 +1,5 @@
 <template>
-  <div class="date-picker-container" :class="[customClass, {'focused': isFocused, 'invalid': !isDateValid}]">
+  <div class="date-picker-container" :class="[customClass, {'focused': isFocused, 'invalid': !isDateValid, [colorClasses.ring]: isFocused}]">
     <div v-if="hasPrefix" class="prefix-wrapper"><slot name="prefix"></slot></div>
     <input
       type="text"
@@ -18,6 +18,7 @@
         :selectedDate="new Date(internalValue)"
         :minDate="minDateObj"
         :maxDate="maxDateObj"
+        :mainColor="mainColor"
         @select="selectDate"
       />
     </div>
@@ -54,6 +55,10 @@ export default {
       type: String,
       default: null
     },
+    mainColor: {
+      type: String,
+      default: 'teal'
+    },
   },
   data() {
     return {
@@ -87,6 +92,13 @@ export default {
         (!this.minDateObj || date >= this.minDateObj) &&
         (!this.maxDateObj || date <= this.maxDateObj)
       );
+    },
+    colorClasses() {
+      return {
+        ring: `ring-${this.mainColor}-500`,
+        text: `text-${this.mainColor}-600`,
+        border: `border-${this.mainColor}-500`,
+      }
     }
   },
   watch: {
@@ -168,7 +180,7 @@ export default {
   @apply flex p-0 items-center border border-gray-300 rounded-md transition-all duration-200 relative;
 }
 .focused {
-  @apply ring-1 ring-main-500;
+  @apply ring-1;
 }
 .date-input {
   @apply flex-1 border-none outline-none w-full p-2 bg-transparent;

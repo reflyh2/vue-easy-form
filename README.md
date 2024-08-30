@@ -43,24 +43,15 @@ Then, you can use the components in your Vue templates:
 
 ## Customizing Colors
 
-This library uses a `main-` prefix for its primary color scheme. To customize these colors, add a `main` color object to your project's `tailwind.config.js` file:
+This library now supports all Tailwind default colors for customization. You can use any color name when setting the mainColor prop on components. For example:
 
 ```
-module.exports = {
-   theme: {
-      extend: {
-         colors: {
-            main: {
-               100: '#e6f7ff',
-               500: '#1890ff',
-               600: '#096dd9',
-               800: '#0050b3',
-            },
-         },
-      },
-   },
-}
+<SelectInput v-model="selectedValue" :options="options" mainColor="blue" />
 ```
+
+Available color names include: slate, gray, zinc, neutral, stone, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, and rose.
+
+The default color remains teal if not specified.
 
 ## Components
 

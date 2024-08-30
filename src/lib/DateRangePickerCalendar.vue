@@ -69,6 +69,10 @@ export default {
       quickRanges: {
          type: Array,
          default: () => []
+      },
+      mainColor: {
+         type: String,
+         default: 'teal'
       }
    },
    data() {
@@ -100,6 +104,15 @@ export default {
          const nextMonth = new Date(this.currentDate);
          nextMonth.setMonth(nextMonth.getMonth() + 1);
          return nextMonth;
+      },
+      colorClasses() {
+         return {
+            bg: `bg-${this.mainColor}-500`,
+            text: `text-${this.mainColor}-600`,
+            hover: `hover:bg-${this.mainColor}-600`,
+            light: `bg-${this.mainColor}-100`,
+            hoverLight: `hover:bg-${this.mainColor}-200`,
+         }
       }
    },
    methods: {
@@ -149,8 +162,9 @@ export default {
          
          return {
             'current-month': isCurrentMonth,
-            'in-range': isCurrentMonth && this.isInRange(date),
-            'selected-date': isCurrentMonth && (this.isSelectedStart(date) || this.isSelectedEnd(date)),
+            [this.colorClasses.light]: isCurrentMonth && this.isInRange(date),
+            [this.colorClasses.bg]: isCurrentMonth && (this.isSelectedStart(date) || this.isSelectedEnd(date)),
+            'text-white': isCurrentMonth && (this.isSelectedStart(date) || this.isSelectedEnd(date)),
             'range-start': isCurrentMonth && this.isSelectedStart(date) && !this.isSelectedEnd(date),
             'range-end': isCurrentMonth && this.isSelectedEnd(date) && !this.isSelectedStart(date),
             'disabled': this.isDisabled(date)
@@ -187,56 +201,46 @@ export default {
 </script>
  
 <style scoped>
-   .date-range-calendar-container {
-      @apply flex bg-white border border-gray-200 rounded-md shadow-md;
-   }
-   .quick-ranges {
-      @apply flex flex-col mr-4 space-y-2 border-r py-4 px-2;
-   }
-   .quick-range-button {
-      @apply px-3 py-2 text-sm text-gray-700 hover:bg-main-100 rounded-md transition-colors duration-200 text-left;
-   }
-   .date-range-calendar {
-      @apply flex-grow py-4 pl-2 pr-4;
-   }
-   .calendar-header {
-      @apply flex justify-between items-center mb-2 font-semibold;
-   }
-   .calendars-container {
-      @apply flex gap-4;
-   }
-   .calendar {
-      @apply grid grid-cols-7 gap-1;
-   }
-   .calendar-day-header {
-      @apply text-center text-sm font-semibold text-gray-600;
-   }
-   .calendar-date {
-      @apply text-center p-1 cursor-pointer text-gray-400 hover:bg-gray-100 rounded-md;
-   }
-   .current-month {
-      @apply text-black;
-   }
-   .selected-date {
-      @apply bg-main-500 text-white hover:bg-main-600;
-   }
-   .in-range {
-      @apply bg-main-100;
-   }
-   .disabled {
-      @apply text-gray-300 cursor-not-allowed hover:bg-white;
-   }
-   .range-start {
-      @apply rounded-l-md;
-   }
-   .range-end {
-      @apply rounded-r-md;
-   }
-   .in-range:hover {
-      @apply bg-main-200;
-   }
-   /* Ensure selected-date styles override in-range styles */
-   .calendar-date.in-range.selected-date {
-      @apply bg-main-500 text-white hover:bg-main-600;
-   }
+.date-range-calendar-container {
+  @apply flex bg-white border border-gray-200 rounded-md shadow-md;
+}
+.quick-ranges {
+  @apply flex flex-col mr-4 space-y-2 border-r py-4 px-2;
+}
+.quick-range-button {
+  @apply px-3 py-2 text-sm text-gray-700 rounded-md transition-colors duration-200 text-left;
+}
+.date-range-calendar {
+  @apply flex-grow py-4 pl-2 pr-4;
+}
+.calendar-header {
+  @apply flex justify-between items-center mb-2 font-semibold;
+}
+.calendars-container {
+  @apply flex gap-4;
+}
+.calendar {
+  @apply grid grid-cols-7 gap-1;
+}
+.calendar-day-header {
+  @apply text-center text-sm font-semibold text-gray-600;
+}
+.calendar-date {
+  @apply text-center p-1 cursor-pointer text-gray-400 hover:bg-gray-100 rounded-md;
+}
+.current-month {
+  @apply text-black;
+}
+.disabled {
+  @apply text-gray-300 cursor-not-allowed hover:bg-white;
+}
+.range-start {
+  @apply rounded-l-md;
+}
+.range-end {
+  @apply rounded-r-md;
+}
+.calendar-date[class*="bg-"] {
+  @apply text-white hover:opacity-90;
+}
 </style>

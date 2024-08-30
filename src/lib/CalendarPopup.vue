@@ -13,7 +13,9 @@
         class="calendar-date"
         :class="{
           'current-month': isCurrentMonth(date),
-          'selected': isSelected(date),
+          [colorClasses.bg]: isSelected(date),
+          'text-white': isSelected(date),
+          [colorClasses.hover]: isSelected(date),
           'disabled': isDisabled(date)
         }"
         @click="selectDate(date)"
@@ -26,7 +28,7 @@
         v-for="(month, index) in months"
         :key="month"
         class="calendar-month"
-        :class="{ 'selected': index === currentDate.getMonth() }"
+        :class="{ [colorClasses.bg]: index === currentDate.getMonth(), 'text-white': index === currentDate.getMonth() }"
         @click="selectMonth(index)"
       >
         {{ month }}
@@ -37,7 +39,7 @@
         v-for="year in yearRange"
         :key="year"
         class="calendar-year"
-        :class="{ 'selected': year === currentDate.getFullYear() }"
+        :class="{ [colorClasses.bg]: year === currentDate.getFullYear(), 'text-white': year === currentDate.getFullYear() }"
         @click="selectYear(year)"
       >
         {{ year }}
@@ -61,6 +63,10 @@ export default {
     maxDate: {
       type: Date,
       default: null
+    },
+    mainColor: {
+      type: String,
+      default: 'teal'
     }
   },
   data() {
@@ -97,6 +103,15 @@ export default {
       const currentYear = this.currentDate.getFullYear()
       const startYear = (Math.floor(currentYear / 10) * 10) + 1
       return Array.from({ length: 20 }, (_, i) => startYear + i)
+    },
+    colorClasses() {
+      return {
+        bg: `bg-${this.mainColor}-500`,
+        text: `text-${this.mainColor}-600`,
+        hover: `hover:bg-${this.mainColor}-600`,
+        light: `bg-${this.mainColor}-100`,
+        hoverLight: `hover:bg-${this.mainColor}-200`,
+      }
     }
   },
   methods: {
@@ -171,13 +186,13 @@ export default {
 .current-month {
   @apply text-black;
 }
-.selected {
-  @apply bg-main-500 text-white hover:bg-main-600;
+.calendar-date.current-month {
+  @apply text-black;
 }
-.calendar-month {
-  @apply text-center p-1 cursor-pointer hover:bg-gray-100 rounded-md;
+.calendar-date[class*="bg-"] {
+  @apply text-white;
 }
-.calendar-year {
+.calendar-month, .calendar-year {
   @apply text-center p-1 cursor-pointer hover:bg-gray-100 rounded-md;
 }
 .calendar-body.month-view {
@@ -185,9 +200,6 @@ export default {
 }
 .calendar-body.year-view {
   @apply grid-cols-4;
-}
-.calendar-month, .calendar-year {
-  @apply text-center p-2 cursor-pointer hover:bg-gray-100 rounded-md;
 }
 .disabled {
   @apply text-gray-300 cursor-not-allowed font-medium hover:bg-white;

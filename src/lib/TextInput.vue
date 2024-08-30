@@ -1,5 +1,5 @@
 <template>
-   <div class="text-input-container" :class="[customClass, {'focused': isFocused}]">
+   <div class="text-input-container" :class="[customClass, {'focused': isFocused, [colorClasses.ring]: isFocused}]">
      <div v-if="hasPrefix" class="prefix-wrapper"><slot name="prefix"></slot></div>
      <input
        type="text"
@@ -27,6 +27,10 @@
        type: [String, Object, Array],
        default: ''
      },
+     mainColor: {
+       type: String,
+       default: 'teal'
+     },
    },
    data() {
      return {
@@ -39,6 +43,11 @@
      },
      hasSuffix() {
        return !!this.$slots.suffix;
+     },
+     colorClasses() {
+       return {
+         ring: `ring-${this.mainColor}-500`,
+       }
      }
    },
    methods: {
@@ -60,7 +69,7 @@
    @apply flex p-0 items-center border border-gray-300 rounded-md transition-all duration-200;
  }
  .focused {
-   @apply ring-1 ring-main-500;
+   @apply ring-1;
  }
  .text-input {
    @apply flex-1 border-none outline-none w-full p-2 bg-transparent;

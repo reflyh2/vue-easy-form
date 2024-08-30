@@ -5,7 +5,7 @@
          <div class="time-label">Hour</div>
          <div class="time-list-container">
            <div class="time-list" ref="hourList" @wheel.prevent="handleWheel('hour', $event)">
-             <div v-for="hour in hours" :key="hour" class="time-item" :class="{ 'selected': hour === selectedHour }" @click.stop="selectItem('hour', hour); $emit('item-selected')">
+             <div v-for="hour in hours" :key="hour" class="time-item" :class="{ [colorClasses.bg]: hour === selectedHour, 'text-white': hour === selectedHour }" @click.stop="selectItem('hour', hour); $emit('item-selected')">
                {{ formatNumber(hour) }}
              </div>
            </div>
@@ -16,7 +16,7 @@
          <div class="time-label">Minute</div>
          <div class="time-list-container">
            <div class="time-list" ref="minuteList" @wheel.prevent="handleWheel('minute', $event)">
-             <div v-for="minute in minutes" :key="minute" class="time-item" :class="{ 'selected': minute === selectedMinute }" @click.stop="selectItem('minute', minute); $emit('item-selected')">
+             <div v-for="minute in minutes" :key="minute" class="time-item" :class="{ [colorClasses.bg]: minute === selectedMinute, 'text-white': minute === selectedMinute }" @click.stop="selectItem('minute', minute); $emit('item-selected')">
                {{ formatNumber(minute) }}
              </div>
            </div>
@@ -27,7 +27,7 @@
          <div class="time-label">Second</div>
          <div class="time-list-container">
            <div class="time-list" ref="secondList" @wheel.prevent="handleWheel('second', $event)">
-             <div v-for="second in seconds" :key="second" class="time-item" :class="{ 'selected': second === selectedSecond }" @click.stop="selectItem('second', second); $emit('item-selected')">
+             <div v-for="second in seconds" :key="second" class="time-item" :class="{ [colorClasses.bg]: second === selectedSecond, 'text-white': second === selectedSecond }" @click.stop="selectItem('second', second); $emit('item-selected')">
                {{ formatNumber(second) }}
              </div>
            </div>
@@ -36,8 +36,8 @@
        </div>
      </div>
      <div v-if="format === '12'" class="am-pm-buttons">
-       <button @click="selectAMPM('AM')" :class="{ 'selected': ampm === 'AM' }">AM</button>
-       <button @click="selectAMPM('PM')" :class="{ 'selected': ampm === 'PM' }">PM</button>
+       <button @click="selectAMPM('AM')" :class="{ [colorClasses.bg]: ampm === 'AM', 'text-white': ampm === 'AM' }">AM</button>
+       <button @click="selectAMPM('PM')" :class="{ [colorClasses.bg]: ampm === 'PM', 'text-white': ampm === 'PM' }">PM</button>
      </div>
    </div>
  </template>
@@ -46,18 +46,22 @@
  export default {
    name: 'TimePickerPopup',
    props: {
-     selectedTime: {
-       type: String,
-       required: true
-     },
-     format: {
-       type: String,
-       required: true
-     },
-     detail: {
-       type: String,
-       required: true
-     }
+    selectedTime: {
+      type: String,
+      required: true
+    },
+    format: {
+      type: String,
+      required: true
+    },
+    detail: {
+      type: String,
+      required: true
+    },
+    mainColor: {
+      type: String,
+      default: 'teal'
+    },
    },
    data() {
      return {
@@ -69,6 +73,15 @@
        minutes: Array.from({ length: 60 }, (_, i) => i),
        seconds: Array.from({ length: 60 }, (_, i) => i),
      }
+   },
+   computed: {
+    colorClasses() {
+      return {
+        bg: `bg-${this.mainColor}-500`,
+        text: `text-${this.mainColor}-600`,
+        hover: `hover:bg-${this.mainColor}-600`,
+      }
+    },
    },
    mounted() {
      this.parseSelectedTime();
@@ -192,9 +205,9 @@
    @apply py-2 px-4 cursor-pointer hover:bg-gray-100 text-center;
    height: 40px;
  }
- .time-item.selected {
-   @apply bg-main-500 text-white;
- }
+ .time-item[class*="bg-"] {
+  @apply text-white;
+}
  .time-list-overlay {
    @apply absolute top-0 left-0 w-full h-full pointer-events-none;
    background: linear-gradient(to bottom, 
@@ -208,9 +221,9 @@
    @apply flex flex-col ml-4;
  }
  .am-pm-buttons button {
-   @apply px-3 py-2 mb-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-md;
+   @apply px-3 py-2 mb-2 text-sm hover:bg-gray-200 rounded-md;
  }
- .am-pm-buttons button.selected {
-   @apply bg-main-500 text-white;
- }
+ .am-pm-buttons button[class*="bg-"] {
+  @apply text-white;
+}
  </style>
