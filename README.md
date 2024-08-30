@@ -199,6 +199,53 @@ Usage:
 <TextInput v-model="text" />
 ```
 
+### SelectInput
+
+A customizable select input component with support for single and multiple selections, option groups, and search functionality.
+
+Props:
+- `modelValue`: The selected value(s) (v-model, can be String, Number, or Array for multiple selections)
+- `options`: An object representing the options structure
+- `multiple`: Boolean to enable multiple selections (default: false)
+- `searchable`: Boolean to enable search functionality (default: false)
+- `idKey`: The key to use for option values (default: 'id')
+- `labelKey`: The key to use for option labels (default: 'name')
+- `customClass`: Custom CSS classes to apply to the input container
+
+Usage:
+
+```
+<template>
+   <SelectInput
+   v-model="selectedValue"
+   :options="options"
+   :multiple="true"
+   :searchable="true"
+   placeholder="Select an option"
+   />
+</template>
+
+<script>
+export default {
+   data() {
+      return {
+         selectedValue: [],
+         options: {
+            fruits: {
+               apple: { id: 1, name: 'Apple' },
+               banana: { id: 2, name: 'Banana' },
+            },
+            vegetables: {
+               carrot: { id: 3, name: 'Carrot' },
+               potato: { id: 4, name: 'Potato' },
+            },
+         },
+      }
+   }
+}
+</script>
+```
+
 ## Common Features
 
 ### Prefix and Suffix Slots
