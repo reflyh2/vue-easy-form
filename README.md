@@ -41,6 +41,27 @@ Then, you can use the components in your Vue templates:
 </template>
 ```
 
+## Customizing Colors
+
+This library uses a `main-` prefix for its primary color scheme. To customize these colors, add a `main` color object to your project's `tailwind.config.js` file:
+
+```
+module.exports = {
+   theme: {
+      extend: {
+         colors: {
+            main: {
+               100: '#e6f7ff',
+               500: '#1890ff',
+               600: '#096dd9',
+               800: '#0050b3',
+            },
+         },
+      },
+   },
+}
+```
+
 ## Components
 
 ### MaskedInput

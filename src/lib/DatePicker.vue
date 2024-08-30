@@ -9,6 +9,7 @@
       @focus="handleFocus"
       @click="showCalendar = true"
       class="date-input"
+      v-bind="$attrs"
     />
     <div v-if="hasSuffix" class="suffix-wrapper"><slot name="suffix"></slot></div>
     <div v-if="!isDateValid" class="error-message">Invalid date</div>
@@ -27,6 +28,7 @@
 import CalendarPopup from './CalendarPopup.vue';
 
 export default {
+  inheritAttrs: false,
   name: 'DatePicker',
   components: {
    CalendarPopup
@@ -166,7 +168,7 @@ export default {
   @apply flex p-0 items-center border border-gray-300 rounded-md transition-all duration-200 relative;
 }
 .focused {
-  @apply ring-1 ring-teal-500;
+  @apply ring-1 ring-main-500;
 }
 .date-input {
   @apply flex-1 border-none outline-none w-full p-2 bg-transparent;

@@ -193,7 +193,7 @@
    height: 40px;
  }
  .time-item.selected {
-   @apply bg-teal-500 text-white;
+   @apply bg-main-500 text-white;
  }
  .time-list-overlay {
    @apply absolute top-0 left-0 w-full h-full pointer-events-none;
@@ -211,6 +211,6 @@
    @apply px-3 py-2 mb-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-md;
  }
  .am-pm-buttons button.selected {
-   @apply bg-teal-500 text-white;
+   @apply bg-main-500 text-white;
  }
  </style>

@@ -172,7 +172,7 @@ export default {
   @apply text-black;
 }
 .selected {
-  @apply bg-teal-500 text-white hover:bg-teal-600;
+  @apply bg-main-500 text-white hover:bg-main-600;
 }
 .calendar-month {
   @apply text-center p-1 cursor-pointer hover:bg-gray-100 rounded-md;

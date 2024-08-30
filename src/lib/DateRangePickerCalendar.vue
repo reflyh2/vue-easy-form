@@ -194,7 +194,7 @@ export default {
       @apply flex flex-col mr-4 space-y-2 border-r py-4 px-2;
    }
    .quick-range-button {
-      @apply px-3 py-2 text-sm text-gray-700 hover:bg-teal-100 rounded-md transition-colors duration-200 text-left;
+      @apply px-3 py-2 text-sm text-gray-700 hover:bg-main-100 rounded-md transition-colors duration-200 text-left;
    }
    .date-range-calendar {
       @apply flex-grow py-4 pl-2 pr-4;
@@ -218,10 +218,10 @@ export default {
       @apply text-black;
    }
    .selected-date {
-      @apply bg-teal-500 text-white hover:bg-teal-600;
+      @apply bg-main-500 text-white hover:bg-main-600;
    }
    .in-range {
-      @apply bg-teal-100;
+      @apply bg-main-100;
    }
    .disabled {
       @apply text-gray-300 cursor-not-allowed hover:bg-white;
@@ -233,10 +233,10 @@ export default {
       @apply rounded-r-md;
    }
    .in-range:hover {
-      @apply bg-teal-200;
+      @apply bg-main-200;
    }
    /* Ensure selected-date styles override in-range styles */
    .calendar-date.in-range.selected-date {
-      @apply bg-teal-500 text-white hover:bg-teal-600;
+      @apply bg-main-500 text-white hover:bg-main-600;
    }
 </style>
